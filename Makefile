@@ -15,7 +15,7 @@
 #MCU_TARGET     = atmega165
 #MCU_TARGET     = atmega165p
 #MCU_TARGET     = atmega168
-#MCU_TARGET = atmega328p
+#MCU_TARGET 	= atmega328p
 #MCU_TARGET     = atmega169
 #MCU_TARGET     = atmega169p
 MCU_TARGET     = atmega2560
@@ -51,10 +51,9 @@ MCU_TARGET     = atmega2560
 #MCU_TARGET     = attiny85
 #MCU_TARGET     = attiny861
 
-BOARD		= ArduinoMega
-LIBNAME		= libfreeRTOS$(MCU_TARGET).a
+LIBNAME		= librtos.a
 OPTIMIZE	= -O2
-DEFS		=  F_CPU=16000000 __AVR_ATmega2560__ GCC_MEGA_AVR MCU_TARGET=__$(MCU_TARGET)__ BOARD=__$(BOARD)__
+DEFS		=  F_CPU=16000000 __AVR_ATmega2560__ GCC_MEGA_AVR MCU_TARGET=__$(MCU_TARGET)__
 INCLUDE		=  include portable
 
 CC			= avr-gcc
@@ -65,7 +64,7 @@ AR			= avr-ar
 
 sources := croutine.c event_groups.c list.c queue.c tasks.c timers.c
 
-# Object files
+# Make a list of object files
 cfiles = $(filter %.c,$(sources))
 sfiles = $(filter %.S,$(sources))
 
@@ -74,6 +73,8 @@ sobjs = $(subst .S,.o,$(sfiles))
  
 objs = $(cobjs)
 objs += $(sobjs)
+
+# override %.S rule to use our CC and CFLAGS
 
 %.o:	%.S	
 	$(CC) $(CFLAGS) -c $< -o $@ 
@@ -92,6 +93,7 @@ include lib_time/lib_time.mk
 include lib-uIP/lib-uIP.mk
 include lib_iinchip/lib_iinchip.mk
 include lib_rtc/lib_rtc.mk
+include lib_ft800/lib_ft800.mk
 
 .PHONY:	all clean
 	
