@@ -1,0 +1,14 @@
+object files
+*.o
+*.elf
+
+# Libraries
+*.a
+
+
+# Executables
+*.hex
+
+# Misc
+*.map
+

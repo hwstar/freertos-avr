@@ -1,3 +1,12 @@
+
+
+
+Freertos fork from felipu. Added Makefiles to build traditionally because I don't care for Eclipse. Tweaked to run on an Arduino Mega board.
+
+Forked from http://sourceforge.net/projects/avrfreertos/
+
+---
+
 Documentation and download available at http://www.FreeRTOS.org/
 
 Changes between V7.6.0 and V8.0.0rc2 (Release Candidate 2) released 5th Jan 2014
