@@ -89,6 +89,9 @@ include MemMang/memmang.mk
 include lib_io/lib_io.mk
 include lib_hd44780/lib_hd44780.mk
 include lib_time/lib_time.mk
+include lib-uIP/lib-uIP.mk
+include lib_iinchip/lib_iinchip.mk
+include lib_rtc/lib_rtc.mk
 
 .PHONY:	all clean
 	
