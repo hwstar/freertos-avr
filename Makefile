@@ -51,11 +51,17 @@ MCU_TARGET     = atmega2560
 #MCU_TARGET     = attiny85
 #MCU_TARGET     = attiny861
 
+
+CLOCKHZ		= 16000000
 LIBNAME		= librtos.a
 OPTIMIZE	= -O2
-DEFS		=  F_CPU=16000000 __AVR_ATmega2560__ GCC_MEGA_AVR MCU_TARGET=__$(MCU_TARGET)__
-INCLUDE		=  include portable
 
+#--------------------------------------------------------------------------
+# Do not change things past this point unless you know what you are doing 
+#--------------------------------------------------------------------------
+
+DEFS		=  F_CPU=$(CLOCKHZ) GCC_MEGA_AVR
+INCLUDE		=  include portable
 CC			= avr-gcc
 AR			= avr-ar
 

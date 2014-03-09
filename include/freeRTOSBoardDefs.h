@@ -27,12 +27,11 @@ extern "C" {
  *
  *----------------------------------------------------------*/
 
-#if defined(__AVR_ATmega640__) || defined(__AVR_ATmega1280__) || defined(__AVR_ATmega1281__) || defined(__AVR_ATmega2560__) || defined(__AVR_ATmega2561__)
-
+#if defined(__AVR_ATmega640__) || defined(__AVR_ATmega1280__) || defined(__AVR_ATmega1281__) || defined(__AVR_ATmega2560__) || defined(__AVR_ATmega2561__) 
+		
 #ifndef _MEGA_
 	#define _MEGA_
 #endif
-
 	#define portUSE_TIMER3											// portUSE_TIMER3 to use 16 bit Timer3
     #define configTICK_RATE_HZ		( ( TickType_t ) 500 )			// Use 500Hz for TIMER3
                                                                     // Use 1000Hz to get mSec timing.
@@ -62,7 +61,7 @@ extern "C" {
 																	// Used for heap_1.c, heap2.c, and heap4.c only, and maximum Array size possible for Heap is 32767.
 #endif
 
-//	#define portW5200						// otherwise we assume W5100 Ethernet
+	//	#define portW5200						// otherwise we assume W5100 Ethernet
 
 	#define portHD44780_LCD					// define the use of the Freetronics HD44780 LCD (or other). Check include hd44780.h for (flexible) pin assignments.
 	#define portSD_CARD						// define the use of the SD Card for Arduino Mega2560 and Freetronics EtherMega
