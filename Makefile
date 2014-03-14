@@ -86,6 +86,21 @@ objs += $(sobjs)
 	$(CC) $(CFLAGS) -c $< -o $@ 
 
 
+# pull in dependency info for *existing* .o files
+-include $(OBJS:.o=.d)
+
+# compile and create dependencies as we go
+
+%.o: %.c
+	$(CC)  -c $(CFLAGS) $*.c -o $*.o
+	@$(CC) -MM $(CFLAGS) $*.c > $*.d
+	@mv -f $*.d $*.d.tmp
+	@sed -e 's|.*:|$*.o:|' < $*.d.tmp > $*.d
+	@sed -e 's/.*://' -e 's/\\$$//' < $*.d.tmp | fmt -1 | \
+	sed -e 's/^ *//' -e 's/$$/:/' >> $*.d
+	@rm -f $*.d.tmp
+
+
 # Compiler flags
 override CFLAGS        = --std=gnu99 -ffunction-sections -fdata-sections -mcall-prologues -mrelax -g -Wall $(OPTIMIZE) -mmcu=$(MCU_TARGET) $(addprefix -D,$(DEFS)) $(addprefix -I,$(INCLUDE))
 
@@ -104,11 +119,12 @@ include lib_ft800/lib_ft800.mk
 .PHONY:	all clean
 	
 all: $(objs)
-	$(AR) rcs $(LIBNAME) $(objs)
+	@$(AR) rcs $(LIBNAME) $(objs)
 	
 
 clean:
-	rm -f $(objs) $(LIBNAME)
+	@rm -f $(objs) $(LIBNAME)
+	@rm -rf *.d
 
 
 

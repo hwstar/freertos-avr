@@ -1,14 +1,12 @@
-object files
+#object files
 *.o
 *.elf
-
+#dependencies
+*.d
 # Libraries
 *.a
-
-
 # Executables
 *.hex
-
 # Misc
 *.map
 
